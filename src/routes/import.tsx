@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Upload, ArrowLeft } from 'lucide-react'
 import { createSet } from '../../src/lib/actions/sets'
 import { parseCSV, parseMarkdown } from '../../lib/importers/parsers'
@@ -46,6 +46,16 @@ function ImportPage() {
   const [preview, setPreview] = useState<{ term: string; definition: string }[] | null>(null)
   const [fileName, setFileName] = useState('')
   const [setTitle, setSetTitle] = useState('')
+  const [defaultCover, setDefaultCover] = useState<string | undefined>(undefined)
+
+  useEffect(() => {
+    fetch('/api/preferences')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((prefs) => {
+        if (prefs?.defaultCover) setDefaultCover(prefs.defaultCover)
+      })
+      .catch(() => {})
+  }, [])
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
@@ -78,6 +88,7 @@ function ImportPage() {
           title: setTitle || fileName.replace(/\.(csv|md|txt)$/i, '') || 'Imported set',
           description: '',
           subject: '',
+          ...(defaultCover ? { cover: defaultCover } : {}),
           cards: preview,
         },
       })

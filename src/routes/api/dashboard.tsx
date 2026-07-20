@@ -97,6 +97,7 @@ export const Route = createFileRoute('/api/dashboard')({
             title: s.title,
             description: s.description,
             subject: s.subject,
+            cover: s.cover,
             cardCount,
             dueCount,
             lastStudied: lastMap.get(s.id) || null,
