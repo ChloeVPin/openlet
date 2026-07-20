@@ -17,7 +17,7 @@ We take the security of Openlet seriously. If you believe you have discovered a 
 
 ### How to Report
 
-- **Email**: Send an email to [security@openlet.com](mailto:security@openlet.com).
+- **Email**: Send an email to [chloevalesquez@gmail.com](mailto:chloevalesquez@gmail.com).
 - Include detailed steps to reproduce the issue, proof-of-concept (PoC), and potential impact.
 - We will acknowledge receipt of your report within 48 hours and provide updates as we work to address the issue.
 
