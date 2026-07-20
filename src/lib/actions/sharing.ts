@@ -53,15 +53,15 @@ export const importSharedSet = createServerFn({ method: 'POST' })
         description: original.description || '',
         subject: original.subject || '',
       })
-      for (let i = 0; i < originalCards.length; i++) {
-        const card = originalCards[i]
-        await tx.insert(cards).values({
+      if (originalCards.length > 0) {
+        const cardValues = originalCards.map((card, i) => ({
           id: crypto.randomUUID(),
           setId: newId,
           term: card.term,
           definition: card.definition,
           position: i,
-        })
+        }))
+        await tx.insert(cards).values(cardValues)
       }
     })
 

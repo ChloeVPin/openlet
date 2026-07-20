@@ -15,7 +15,7 @@ const CreateSetSchema = z.object({
   description: z.string().max(1000).default(''),
   subject: z.string().max(100).default(''),
   cover: z.string().max(64).optional(),
-  cards: z.array(CardSchema).min(1),
+  cards: z.array(CardSchema).min(1).max(2000),
 })
 
 export const createSet = createServerFn({ method: 'POST' })
@@ -35,16 +35,14 @@ export const createSet = createServerFn({ method: 'POST' })
         subject,
         ...(cover ? { cover } : {}),
       })
-      for (let i = 0; i < inputCards.length; i++) {
-        const card = inputCards[i]
-        await tx.insert(cards).values({
-          id: crypto.randomUUID(),
-          setId: id,
-          term: card.term,
-          definition: card.definition,
-          position: i,
-        })
-      }
+      const cardValues = inputCards.map((card, i) => ({
+        id: crypto.randomUUID(),
+        setId: id,
+        term: card.term,
+        definition: card.definition,
+        position: i,
+      }))
+      await tx.insert(cards).values(cardValues)
     })
 
     return { id }
@@ -55,7 +53,7 @@ const UpdateSetSchema = z.object({
   title: z.string().min(1).max(200),
   description: z.string().max(1000).default(''),
   subject: z.string().max(100).default(''),
-  cards: z.array(CardSchema).min(1),
+  cards: z.array(CardSchema).min(1).max(2000),
 })
 
 export const updateSet = createServerFn({ method: 'POST' })
@@ -78,16 +76,14 @@ export const updateSet = createServerFn({ method: 'POST' })
         .set({ title, description, subject, updatedAt: new Date() })
         .where(eq(sets.id, setId))
       await tx.delete(cards).where(eq(cards.setId, setId))
-      for (let i = 0; i < inputCards.length; i++) {
-        const card = inputCards[i]
-        await tx.insert(cards).values({
-          id: crypto.randomUUID(),
-          setId,
-          term: card.term,
-          definition: card.definition,
-          position: i,
-        })
-      }
+      const cardValues = inputCards.map((card, i) => ({
+        id: crypto.randomUUID(),
+        setId,
+        term: card.term,
+        definition: card.definition,
+        position: i,
+      }))
+      await tx.insert(cards).values(cardValues)
     })
 
     return { ok: true }
