@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # Maintain Node.js / pnpm dependencies in package.json
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Group non-breaking updates to prevent PR spam
+    groups:
+      dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    open-pull-requests-limit: 5
