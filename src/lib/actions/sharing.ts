@@ -12,10 +12,13 @@ const SetIdSchema = z.object({
 export const getSetForSharing = createServerFn({ method: 'GET' })
   .middleware([authMiddleware])
   .validator((data: unknown) => SetIdSchema.parse(data))
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     const { setId } = data
     const [set] = await db.select().from(sets).where(eq(sets.id, setId)).limit(1)
     if (!set) return null
+    if (set.userId !== context.user.id && set.visibility !== 'public') {
+      throw new Error('Unauthorized')
+    }
     const cardList = await db
       .select()
       .from(cards)
@@ -31,6 +34,9 @@ export const importSharedSet = createServerFn({ method: 'POST' })
     const { setId } = data
     const [original] = await db.select().from(sets).where(eq(sets.id, setId)).limit(1)
     if (!original) throw new Error('Set not found')
+    if (original.userId !== context.user.id && original.visibility !== 'public') {
+      throw new Error('Unauthorized')
+    }
 
     const originalCards = await db
       .select()

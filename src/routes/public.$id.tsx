@@ -1,12 +1,31 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
+import { getRequestHeaders } from '@tanstack/react-start/server'
 import { z } from 'zod'
 import { Badge } from '../components/ui/badge'
 import { Button } from '../components/ui/button'
 
+// In-memory rate limiting
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
+const MAX_REQUESTS = 60
+const WINDOW_MS = 60 * 1000
+
 const loadPublicSet = createServerFn({ method: 'GET' })
   .validator(z.string())
   .handler(async ({ data: id }) => {
+    const headers = getRequestHeaders()
+    const ip = headers.get('x-forwarded-for') || 'unknown'
+    const now = Date.now()
+    const record = rateLimitMap.get(ip)
+
+    if (!record || now > record.resetTime) {
+      rateLimitMap.set(ip, { count: 1, resetTime: now + WINDOW_MS })
+    } else if (record.count >= MAX_REQUESTS) {
+      throw new Error('Too many requests. Please try again later.')
+    } else {
+      record.count++
+    }
+
     // Static imports are safe here: createServerFn extracts the handler server-side
     const { db } = await import('@/lib/db')
     const { sets: setsTable, cards } = await import('@/lib/db/schema')

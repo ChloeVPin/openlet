@@ -40,7 +40,14 @@ export const toggleCardStar = createServerFn({ method: 'POST' })
   .validator((data: unknown) => ToggleCardStarSchema.parse(data))
   .handler(async ({ data, context }) => {
     const { cardId, setId, isStarred } = data
-    const { cardMetadata } = await import('../../../lib/db/schema')
+    const { cardMetadata, sets } = await import('../../../lib/db/schema')
+    const { eq } = await import('drizzle-orm')
+
+    const [set] = await db.select().from(sets).where(eq(sets.id, setId)).limit(1)
+    if (!set) throw new Error('Set not found')
+    if (set.userId !== context.user.id && set.visibility !== 'public') {
+      throw new Error('Unauthorized')
+    }
 
     await db
       .insert(cardMetadata)
