@@ -1,0 +1,16 @@
+# Ignore test and script folders
+tests/
+scripts/
+
+# Ignore documentation
+DESIGN.md
+PRODUCT.md
+README.md
+
+# Ignore agent and AI tools configurations
+.agents/
+.codex/
+skills-lock.json
+
+# Vite and Vitest configs
+vitest.config.ts

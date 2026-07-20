@@ -1,0 +1,15 @@
+{
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "outputDirectory": "dist/client",
+  "rewrites": [
+    {
+      "source": "/((?!assets/|.*\\.(?:js|css|svg|png|ico|webmanifest|jpg|jpeg|gif|woff2?|ttf|json|xml|txt)$).*)",
+      "destination": "/api/ssr"
+    }
+  ],
+  "functions": {
+    "api/ssr.js": {
+      "includeFiles": "dist/**"
+    }
+  }
+}
