@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
+  <title id="title">Openlet - Open-Source Flashcards with FSRS Spaced Repetition</title>
+  <desc id="desc">Open-source flashcards app featuring FSRS spaced repetition, 5 study modes, AI generation, and Supabase auth.</desc>
+
+  <!-- Background Canvas (Flat Light Mode, No Gradients) -->
+  <rect width="1200" height="340" rx="16" fill="#FAFAFA"/>
+  <rect width="1200" height="340" rx="16" fill="none" stroke="#EDEFF4" stroke-width="1.5"/>
+
+  <!-- Left Column: Official Openlet Logo & Information (No Pills, No Gradients) -->
+  <g transform="translate(60, 48)">
+    <!-- Official Openlet Logo Mark -->
+    <g transform="translate(0, 0)">
+      <rect width="48" height="48" rx="12" fill="#4255FF"/>
+      <circle cx="24" cy="24" r="11" stroke="#FFFFFF" stroke-width="5.5" fill="none"/>
+    </g>
+
+    <!-- Main Title -->
+    <text x="64" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="800" fill="#303545" letter-spacing="-1.2">Openlet</text>
+
+    <!-- Subtitle -->
+    <text x="0" y="92" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" fill="#646F90" font-weight="400">Open-source flashcards with FSRS spaced</text>
+    <text x="0" y="120" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" fill="#646F90" font-weight="400">repetition and 5 interactive study modes.</text>
+
+    <!-- Site Link / Demo Box -->
+    <g transform="translate(0, 162)">
+      <rect width="436" height="48" rx="8" fill="#FFFFFF" stroke="#4255FF" stroke-width="1.5"/>
+      <text x="16" y="30" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" fill="#4255FF" font-weight="700">WEB</text>
+      <text x="60" y="30" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#303545" font-weight="600">https://openletapp.vercel.app</text>
+    </g>
+  </g>
+
+  <!-- Right Column: Official Product Feature Spec Card (Balanced Vertical Padding) -->
+  <g transform="translate(560, 42)">
+    <rect width="580" height="254" rx="12" fill="#FFFFFF"/>
+    <rect width="580" height="254" rx="12" fill="none" stroke="#EDEFF4" stroke-width="1.5"/>
+
+    <!-- Header Bar -->
+    <g transform="translate(24, 26)">
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#4255FF" letter-spacing="1">STUDY ENGINE &amp; PLATFORM SPEC</text>
+      <text x="0" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#303545">Core Capabilities &amp; Architecture</text>
+    </g>
+
+    <!-- Spec Rows with Balanced Spacing -->
+    <g transform="translate(24, 64)">
+      <!-- Row 1 -->
+      <g transform="translate(0, 12)">
+        <rect width="532" height="34" rx="6" fill="#FAFAFA" stroke="#EDEFF4" stroke-width="1"/>
+        <text x="14" y="22" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12.5" font-weight="700" fill="#4255FF">5 Interactive Study Modes</text>
+        <text x="195" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" fill="#646F90">Flashcards, Learn, Write, Match &amp; Test</text>
+      </g>
+
+      <!-- Row 2 -->
+      <g transform="translate(0, 54)">
+        <rect width="532" height="34" rx="6" fill="#FAFAFA" stroke="#EDEFF4" stroke-width="1"/>
+        <text x="14" y="22" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12.5" font-weight="700" fill="#303545">FSRS Spaced Repetition</text>
+        <text x="195" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" fill="#646F90">Optimized memory retention scheduling</text>
+      </g>
+
+      <!-- Row 3 -->
+      <g transform="translate(0, 96)">
+        <rect width="532" height="34" rx="6" fill="#FAFAFA" stroke="#EDEFF4" stroke-width="1"/>
+        <text x="14" y="22" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12.5" font-weight="700" fill="#303545">AI Card &amp; Image Occlusion</text>
+        <text x="195" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" fill="#646F90">Auto generation from notes + visual masks</text>
+      </g>
+
+      <!-- Row 4 -->
+      <g transform="translate(0, 138)">
+        <rect width="532" height="34" rx="6" fill="#FAFAFA" stroke="#EDEFF4" stroke-width="1"/>
+        <text x="14" y="22" font-family="ui-monospace, SFMono-Regular, monospace" font-size="12.5" font-weight="700" fill="#303545">TanStack &amp; Supabase Auth</text>
+        <text x="195" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" fill="#646F90">React 19 SSR, Drizzle ORM &amp; Rate Limiting</text>
+      </g>
+    </g>
+  </g>
+</svg>
