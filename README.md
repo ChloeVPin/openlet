@@ -17,12 +17,12 @@
 
 ## Overview
 
-`Openlet` is a free, open-source flashcard application featuring FSRS spaced repetition scheduling. It delivers a premium, paywall-free study experience designed for students, developers, and researchers.
+Openlet is a free and open-source flashcard application. It uses the FSRS spaced-repetition algorithm to schedule reviews.
 
-With support for 5 interactive study modes, automatic AI flashcard generation, image occlusion, bulk CSV imports, and collaborative deck sharing, Openlet provides an end-to-end learning platform built on modern open-source web technologies.
+Openlet supports five study modes. It can generate flashcards with AI, make image-occlusion cards, import CSV files, and share decks. It does not require a paid subscription.
 
-> **Live Web Application**  
-> Explore the live application: [https://openletapp.vercel.app](https://openletapp.vercel.app)
+> **Live application**  
+> Open [https://openletapp.vercel.app](https://openletapp.vercel.app).
 
 <br />
 
@@ -32,42 +32,49 @@ With support for 5 interactive study modes, automatic AI flashcard generation, i
 
 ---
 
-## Core Capabilities
+## Main Capabilities
 
-- **Five Study Modes**: Study with Flashcards, Learn (FSRS spaced repetition), Write, Match, and Test environments.
-- **FSRS Spaced Repetition**: Utilizes a custom FSRS implementation (`lib/fsrs.ts`) for memory scheduling and optimal retention intervals.
-- **AI Flashcard Generation**: Automatically generate study decks directly from lecture notes, textbooks, or raw text.
-- **Image Occlusion**: Create visual study cards by masking specific regions of diagrams and medical images.
-- **Data Ingestion**: Support for direct CSV uploads and bulk text pasting.
-- **Collaborative Folders & Classes**: Share decks via public links with built-in visibility controls and access permissions.
-- **Supabase Authentication**: Seamless Google and GitHub single sign-on powered by Supabase Auth with SSR cookie sessions.
-- **Token Bucket Rate Limiting**: Postgres-backed rate limiting on all API routes to protect server endpoints.
+- **Five study modes**: Use Flashcards, Learn, Write, Match, or Test mode.
+- **FSRS spaced repetition**: Use the custom implementation in `lib/fsrs.ts` to calculate review intervals.
+- **AI flashcard generation**: Create study decks from lecture notes, textbooks, or plain text.
+- **Image occlusion**: Mask selected areas of diagrams and medical images.
+- **Data import**: Upload CSV files or paste multiple text items.
+- **Folders and classes**: Share decks with public links and control access.
+- **Supabase authentication**: Sign in with Google or GitHub. Supabase Auth stores the session in SSR cookies.
+- **Rate limiting**: Use a Postgres token bucket on API routes.
 
 ---
 
 ## Technology Stack
 
-| Architecture Component | Technology Choice | Functionality & Role |
+| Component | Technology | Function |
 |---|---|---|
-| **Framework** | [TanStack Start](https://tanstack.com/start) | React 19 server-side rendering and full-stack web architecture |
-| **Routing Engine** | [TanStack Router](https://tanstack.com/router) | Type-safe file-based client and server routing |
-| **Styling Infrastructure** | [Tailwind CSS v4](https://tailwindcss.com) | Production design system and UI primitive styling |
-| **Database Engine** | [Postgres](https://postgresql.org) on [Supabase](https://supabase.com) | Primary relational storage with Row Level Security (RLS) |
-| **ORM** | [Drizzle ORM](https://orm.drizzle.team) | Type-safe SQL schema definitions and migrations |
-| **Authentication** | [Supabase Auth](https://supabase.com/auth) | Google and GitHub OAuth with SSR session management |
-| **Hosting Platform** | [Vercel](https://vercel.com) | Edge deployment with automatic preview environments |
-| **Spaced Repetition** | [FSRS Engine](https://github.com/open-spaced-repetition/fsrs.js) | Custom memory retention calculation engine |
+| Framework | [TanStack Start](https://tanstack.com/start) | React 19 server rendering and full-stack application framework |
+| Router | [TanStack Router](https://tanstack.com/router) | Type-safe file-based routing for client and server routes |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com) | UI styles and design tokens |
+| Database | [Postgres](https://postgresql.org) on [Supabase](https://supabase.com) | Relational data storage with Row Level Security |
+| ORM | [Drizzle ORM](https://orm.drizzle.team) | Type-safe schema definitions and migrations |
+| Authentication | [Supabase Auth](https://supabase.com/auth) | Google and GitHub OAuth with SSR sessions |
+| Hosting | [Vercel](https://vercel.com) | Production and preview deployments |
+| Spaced repetition | [FSRS](https://github.com/open-spaced-repetition/fsrs.js) | Review-interval calculations |
 
 ---
 
-## Getting Started
+## Get Started
 
-### System Prerequisites
-- Node.js v20.0.0 or higher
-- `pnpm` package manager (`npm i -g pnpm`)
-- A Supabase project (free tier fully supported)
+### Requirements
 
-### Local Development Setup
+- Node.js 20.0.0 or later
+- `pnpm` package manager
+- A Supabase project
+
+Install `pnpm` when necessary:
+
+```bash
+npm i -g pnpm
+```
+
+### Local Setup
 
 1. Clone the repository and install dependencies:
 
@@ -77,83 +84,87 @@ cd openlet
 pnpm install
 ```
 
-2. Configure environment variables:
+2. Create the local environment file:
 
 ```bash
 cp .env.example .env
 ```
 
-Fill in `DATABASE_URL`, `VITE_SUPABASE_URL`, and `VITE_SUPABASE_ANON_KEY` with your Supabase API credentials.
+3. Add values for these variables:
 
-3. Apply database schema and RLS security migrations:
+- `DATABASE_URL`
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+
+4. Apply the database schema and security migrations:
 
 ```bash
 pnpm drizzle-kit push
 node --env-file=.env scripts/apply-migration.mjs
 ```
 
-4. Launch the local development server:
+5. Start the development server:
 
 ```bash
 pnpm dev
 ```
 
-Navigate to `http://localhost:3000` in your web browser.
+6. Open `http://localhost:3000`.
 
 ---
 
-## Environment Variables Matrix
+## Environment Variables
 
-| Environment Variable | Required | Description |
+| Variable | Required | Function |
 |---|---|---|
-| `DATABASE_URL` | Yes | Postgres connection pooler string (Supabase port 6543) |
-| `VITE_SUPABASE_URL` | Yes | Supabase project URL from API settings |
+| `DATABASE_URL` | Yes | Supabase Postgres pooler connection string on port 6543 |
+| `VITE_SUPABASE_URL` | Yes | Supabase project URL |
 | `VITE_SUPABASE_ANON_KEY` | Yes | Supabase public anonymous API key |
-| `VITE_SITE_URL` | No | Target deployment URL (defaults to Vercel preview URL) |
-| `NODE_ENV` | No | Target runtime environment (`development` or `production`) |
+| `VITE_SITE_URL` | No | Deployment URL. The default is the Vercel preview URL. |
+| `NODE_ENV` | No | Runtime environment: `development` or `production` |
 
 ---
 
-## OAuth Authentication Setup
+## Configure OAuth
 
 To configure Google or GitHub authentication:
 
-1. Navigate to **Authentication > Providers** in your Supabase dashboard.
-2. Enable Google and GitHub OAuth options.
-3. Paste the Client ID and Client Secret from your respective developer console.
-4. Set the redirect callback URL to: `https://your-domain.co/auth/callback`
+1. Open **Authentication > Providers** in the Supabase dashboard.
+2. Enable Google, GitHub, or both.
+3. Add the Client ID and Client Secret from the provider.
+4. Set the callback URL to `https://your-domain.co/auth/callback`.
 
 ---
 
-## Repository Directory Architecture
+## Repository Structure
 
 ```text
 openlet/
 ├── src/
-│   ├── components/        # React components (UI primitives, study chrome, flashcards)
-│   │   └── ui/            # Base UI primitives (buttons, inputs, dialogs, tooltips)
+│   ├── components/        # React components
+│   │   └── ui/            # Base UI components
 │   ├── lib/
-│   │   ├── auth/          # Supabase Auth actions & SSR middleware
+│   │   ├── auth/          # Supabase Auth actions and SSR middleware
 │   │   ├── supabase/      # Supabase client configuration
-│   │   └── actions/       # Server functions (study sets, preferences, sharing)
-│   ├── routes/            # TanStack Router file-based route definitions
-│   │   ├── api/           # API endpoints (dashboard, card metadata, sets)
-│   │   └── set.$id.*      # Study mode controllers (flashcards, learn, write, match, test)
-│   ├── router.tsx         # Router configuration & route tree registry
+│   │   └── actions/       # Server functions
+│   ├── routes/            # TanStack Router route definitions
+│   │   ├── api/           # API endpoints
+│   │   └── set.$id.*      # Study-mode controllers
+│   ├── router.tsx         # Router configuration
 │   └── start.ts           # TanStack Start entry point
 ├── lib/
-│   ├── db/                # Drizzle database schema & connection pooler
-│   ├── fsrs.ts            # FSRS spaced repetition algorithm logic
-│   └── types.ts           # Shared TypeScript interfaces
-├── drizzle/               # Database migration states
-├── public/                # Static assets (logos, icons, web manifest)
-├── scripts/               # Migration & test seeding scripts
-└── tests/                 # Unit, security & integration test suites
+│   ├── db/                # Drizzle schema and database connection
+│   ├── fsrs.ts            # FSRS implementation
+│   └── types.ts           # Shared TypeScript types
+├── drizzle/               # Database migration state
+├── public/                # Static assets
+├── scripts/               # Migration and test scripts
+└── tests/                 # Unit, security, and integration tests
 ```
 
 ---
 
-## License & Contributing
+## License and Contributions
 
-- **License**: Released under the [MIT License](LICENSE).
-- **Contributions**: Openlet is fully open source. Pull requests and feature proposals are welcome.
+- **License**: [MIT License](LICENSE)
+- **Contributions**: Pull requests and feature proposals are welcome.
