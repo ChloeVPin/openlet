@@ -16,9 +16,6 @@ Openlet is a free and open-source flashcard application. It uses the FSRS spaced
 
 Openlet supports five study modes. It can generate flashcards with AI, make image-occlusion cards, import CSV files, and share decks. It does not require a paid subscription.
 
-> **Live application**  
-> Open [https://openletapp.vercel.app](https://openletapp.vercel.app).
-
 <br />
 
 <p align="center">
