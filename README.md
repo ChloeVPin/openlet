@@ -6,10 +6,7 @@
   <p>Open-source flashcards with FSRS spaced repetition.</p>
 
   <p>
-    <a href="LICENSE"> <img src="https://img.shields.io/badge/license-MIT-4255FF" alt="License" /> </a>
-    <a href="https://openletapp.vercel.app"> <img src="https://img.shields.io/badge/deployed-Vercel-4255FF" alt="Deployed on Vercel" /> </a>
-    <img src="https://img.shields.io/badge/framework-TanStack%20Start-4255FF" alt="TanStack Start" />
-    <img src="https://img.shields.io/badge/algorithm-FSRS%20Spaced%20Repetition-4255FF" alt="FSRS Spaced Repetition" />
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="MIT license" /></a>
   </p>
 </div>
 
